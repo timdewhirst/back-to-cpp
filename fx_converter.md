@@ -12,9 +12,10 @@ Atttributes:
 
 Attributes:
 
-- from currency
-- to currency
-- rate
+- base
+- quote
+- bid
+- ask
 
 ## Class __ExchangeBoard__
 
@@ -23,10 +24,11 @@ Attributes:
 
 ## Main application
 
-Main application is __Converter app__, which is a console application with the following functionality.
+Main application is __Converter app__, which is a console application with the following functionality:
 
-- loads currencies information from a CSV file
-- loads exchange rates from a CSV file
+- loads information about currencies from currencies.csv file
+- loads exchange rates from exchange_rates.csv file
 - asks for amount and currency to exchange from
 - asks for currency to exchange to
 - outputs exchanged amount
+- if there is no way to make a currency exchange, outputs a message
