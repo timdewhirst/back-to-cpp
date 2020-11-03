@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+
 #pragma once
 
 using namespace std;
@@ -25,6 +26,6 @@ class ExchangeRate
         void setQuote(string value);
         void setBid(double value);
         void setAsk(double value);
+};
 
         void readExchangeRatesFromFile(string fileName, vector<ExchangeRate> &exchangeRates);
-};

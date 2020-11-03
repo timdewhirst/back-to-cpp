@@ -21,5 +21,6 @@ class Currency
         void setCode(string value);
         void setName(string value);
         void setNumerice_code(int value);
-        void readCurrenciesFromFile(string &fileName, vector<Currency> &currencies);
 };
+
+        void readCurrenciesFromFile(string fileName, vector<Currency> &currencies);

@@ -1,9 +1,10 @@
-#include "exchangeRate.hpp"
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <string>
 #include <sstream>
+
+#include "exchangeRate.hpp"
 
 using namespace std;
 

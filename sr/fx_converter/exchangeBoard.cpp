@@ -1,21 +1,8 @@
-/* Calculating the Exchange
-Methods:
-CONVERT TO USD:
-If Base !USD & !GBP {Convert to USD Inverse}
-ELSE If Base GBP {Convert to USD}
-ELSE IF USD return value
-
-CONVERT FROM USD:
-If quote GBP {Convert inverse}
-Else {Convert Normal}
-
-If quote USD {run method 1}
-ELSE If if quote !USD {run method 1 & 2}
-*/
-#include "exchangeBoard.hpp"
 #include <string>
 #include <vector>
 #include <iostream>
+
+#include "exchangeBoard.hpp"
 
 void displayRates(vector<ExchangeRate> & exchangeRates)
 {
@@ -25,5 +12,32 @@ void displayRates(vector<ExchangeRate> & exchangeRates)
     }
 }
 
-double convertToUSD(string &base, string &quote, double amount);
+double convertToUSD(vector<ExchangeRate> &rates, string &base, string &quote, double amount){
+    //If userQuote does not have Base USD(Convert Amount*Ask)
+    //If userQuote does have Base USD (Convert Amount*1/Ask)
+    //If Quote USD Return Amount
+    return amount;
+}
+//ELSE && quote !USD
+double convertFromUSD(vector<ExchangeRate> &rates, string &base, string &quote, double amount){
+    //If userQuote(USD) quote does have Base USD (Convert Amount*Ask)
+    //If userQuote(USD) does not have Base USD (Convert Amount *1/Ask)
+    return amount;
+}
 
+double exchange(vector<ExchangeRate> &rates, string &base, string &quote, double amount)
+{
+    if(base != "USD") {
+        double usdAmount;
+        usdAmount = convertToUSD(rates, base, quote, amount);
+        if(quote == "USD") {
+            return usdAmount;
+        }
+        else {
+            return convertFromUSD(rates, base, quote, usdAmount);
+        }
+    }
+    else if (base == "USD") {
+        return convertFromUSD(rates, base, quote, amount);
+    }
+}

@@ -1,6 +1,6 @@
-#include "currency.cpp"
-#include "exchangeRate.cpp"
-#include "exchangeBoard.cpp"
+#include "currency.hpp"
+#include "exchangeRate.hpp"
+#include "exchangeBoard.hpp"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -34,6 +34,10 @@ int main()
     cin >> userAmount;
     cout << "Please enter the currency code (e.g. USD) you wish to convert to: " << endl;
     cin >> convertedCurrency;
+
+    convertedAmount = exchange(exchangeRates, userCurrency, convertedCurrency, userAmount);
+
+    cout << "You have exchanged " << userAmount << " " << userCurrency << " for " << convertedAmount << " " << convertedCurrency << "." << endl;
 
     return 0;
 }
