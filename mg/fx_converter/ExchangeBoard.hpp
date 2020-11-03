@@ -1,5 +1,7 @@
+#pragma once
 #include <iostream>
 #include <vector>
+#include "ExchangeRate.hpp"
 using namespace std;
 //## Class __ExchangeBoard__
 
@@ -8,8 +10,25 @@ using namespace std;
 
 
 class ExchangeBoard{
-    vector<ExchangeBoard> exchangeRates;
-    bool didExchange;
+    private:
+        vector<ExchangeRate>& exchangeRates;   
+    public:
+        bool didExchange=false;
+        ExchangeBoard();
 
+//Constructor
+/*ExchangeBoard(vector<ExchangeRate>& new_exchageRates){
+            exchangeRates= new_exchageRates;
+}
+*/
+/*
+//getexchageRates to get code attribute
+   string getExchageRates (){
+        return exchageRates;
+    }
+//setexchageRates to set real part
+    void setExchageRates(string new_exchageRates){
+        exchageRates=new_exchageRates;
+    }*/
 
 };

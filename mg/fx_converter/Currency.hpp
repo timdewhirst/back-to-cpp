@@ -11,17 +11,19 @@ using namespace std;
 
 class Currency{
     private:
-        string code;
         string name;
+        string code;
         int numeric_code;
+        int minor_unit;
     public:
         Currency();
 
 //Constructor
-    Currency(string new_name, string new_code, int new_numeric_code){
-            code=new_code;
+    Currency(string new_name, string new_code, int new_numeric_code,int minor_unit){
             name=new_name;
+            code=new_code;
             numeric_code=new_numeric_code;
+            this->minor_unit=minor_unit;
     }
 
 //getCode to get code attribute
@@ -49,6 +51,15 @@ class Currency{
 //setCode to set real part
     void setNumericCode(int new_numeric_code){
         numeric_code=new_numeric_code;
+    }
+
+//getCode to get code attribute
+    double getMinorUnit (){
+        return minor_unit;
+    }
+//setCode to set real part
+    void setMinorUnit(int new_minor_unit){
+        minor_unit=new_minor_unit;
     }
 
 };
