@@ -1,5 +1,6 @@
 #include "ExchangeRate.hpp"
 #include <vector>
+#include <algorithm>
 
 
 //Conversion calculator
@@ -10,8 +11,12 @@ bool corr_mon(vector <ExchangeRate> &vec,string &curr_from, string &curr_to,doub
     double quote_rate;
     double conversion;
 
+    find(vec.begin(),vec.end(),curr_from);
+    
+
     for(int i=0; i<vec.size();i++){
         cout<<vec[i].getBase()<<endl;
+        
         if ((vec[i].getBase()==curr_from)){
             corr_base= true;
             base_rate= vec[i].getBid();

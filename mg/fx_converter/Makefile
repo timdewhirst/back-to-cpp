@@ -1,13 +1,19 @@
-all: app.exe
+all: main.exe
 
-app.exe: app.o mainv2.o
-	g++ -o app.exe app.o complex.o
+main.exe: main.o Currency.o  ExchangeRate.o ExchangeBoard.o
+	g++ -o main.exe main.o Currency.o  ExchangeRate.o ExchangeBoard.o
 
-app.o: app.cpp
-	g++ -g -c app.cpp
+main.o: main.cpp 
+	g++ -g -c main.cpp
 
-mainv2.o: mainv2.cpp Currency.hpp CurrencyContainer.hpp ExchangeRate.hpp ExchangeBoard.hpp
-	g++ -g -c mainv2.cpp
+Currency.o: Currency.cpp Currency.hpp
+	g++ -g -c Currency.cpp
+
+ExchangeRate.o: ExchangeRate.cpp ExchangeRate.hpp 
+	g++ -g -c ExchangeRate.cpp
+
+ExchangeBoard.o: ExchangeBoard.cpp ExchangeBoard.hpp
+	g++ -g -c ExchangeBoard.cpp
 
 clean:
-	rm app.exe app.o mainv2.o
+	rm main.exe main.o Currency.o ExchangeBoard.o ExchangeRate.o

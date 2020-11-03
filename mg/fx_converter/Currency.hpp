@@ -3,12 +3,6 @@
 using namespace std;
 //## Class __Currency__
 
-//Atttributes:
-
-//- code
-//- name
-//- numeric code
-
 class Currency{
     private:
         string name;
