@@ -21,6 +21,9 @@ void displayRates(vector<ExchangeRate> & exchangeRates)
 {
     for ( size_t i = 0; i < exchangeRates.size(); ++i ) 
     {
-        cout << "Currency:" << exchangeRates[i].base << "/" << exchangeRates[i].quote << " Rate: " << exchangeRates[i].bid << endl;
+        cout << "Currency: " << exchangeRates[i].getBase() << "/" << exchangeRates[i].getQuote() << " Bid: " << exchangeRates[i].getBid() << " Ask: " << exchangeRates[i].getAsk() << endl;
     }
 }
+
+double convertToUSD(string &base, string &quote, double amount);
+

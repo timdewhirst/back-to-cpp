@@ -6,14 +6,20 @@ using namespace std;
 
 class Currency
 {
-    public:
-
+    private:
         string code;
         string name;
         int numeric_code;
 
+    public:
         Currency() : code{""}, name{""}, numeric_code{0} {};
         ~Currency() {};
 
-        void readCurrenciesFromFile(string fileName, vector<Currency> &currencies);
+        string getCode();
+        string getName();
+        int getNumerice_code();
+        void setCode(string value);
+        void setName(string value);
+        void setNumerice_code(int value);
+        void readCurrenciesFromFile(string &fileName, vector<Currency> &currencies);
 };

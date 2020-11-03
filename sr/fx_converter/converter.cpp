@@ -9,7 +9,8 @@
 using namespace std;
 
 int main()
-{
+{   
+    char userChoice;
     string userCurrency;
     string convertedCurrency;
     double userAmount;
@@ -17,11 +18,16 @@ int main()
     vector<ExchangeRate> exchangeRates;
     vector<Currency> currencies;
     
-    readExchangeRatesFromFile("/home/stephen/projects/back-to-cpp/fx_converter/datasets/exchange_rates.csv", exchangeRates);
-    readCurrenciesFromFile("/home/stephen/projects/back-to-cpp/fx_converter/datasets/currencies.csv", currencies);
+    readExchangeRatesFromFile("/home/stephen/projects/back-to-cpp/datasets/exchange_rates.csv", exchangeRates);
+    readCurrenciesFromFile("/home/stephen/projects/back-to-cpp/datasets/currencies.csv", currencies);
 
-    displayRates(exchangeRates);
-    
+    cout << "Do you wish to view the exchange rates? Y/N" << endl;
+    cin >> userChoice;
+    userChoice = toupper(userChoice);
+    if (userChoice == 'Y')
+    {
+        displayRates(exchangeRates);
+    }
     cout << "Enter the currency code (e.g. USD) you wish to trade: " << endl;
     cin >> userCurrency;
     cout << "Please enter the amount you wish to trade: " << endl;
