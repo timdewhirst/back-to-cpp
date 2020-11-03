@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 
 using namespace std;
@@ -11,9 +12,9 @@ private:
 
 public:
     Currency(const string& name, const string& code, const int numeric_code);
-    ~Currency();
+    ~Currency() {}
 
-    const string& get_name();
-    const string& get_code();
-    int get_numeric_code();
+    const string& name() const { return m_name; }
+    const string& code() const { return m_code; }
+    int numeric_code() const { return m_numeric_code; }
 };

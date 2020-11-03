@@ -11,7 +11,7 @@ class ExchangeBoard
 
     void displayRates(vector<ExchangeRate> &exchangeRates);
 
-    double convertToUSD(string base, string quote, double amount);
-    double convertFromUSD(string quote, double amount);
-    double exchange(string base, string quote, double amount);
+    double convertToUSD(string &base, string &quote, double amount);
+    double convertFromUSD(string &quote, double amount);
+    double exchange(string &base, string &quote, double amount);
 };

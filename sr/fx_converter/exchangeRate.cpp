@@ -7,6 +7,38 @@
 
 using namespace std;
 
+string ExchangeRate::getBase() {
+    return base;
+}
+
+string ExchangeRate::getQuote() {
+    return quote;
+}
+
+double ExchangeRate::getBid() {
+    return bid;
+}
+
+double ExchangeRate::getAsk() {
+    return ask;
+}
+
+void ExchangeRate::setBase(string value) {
+    base = value;
+}
+
+void ExchangeRate::setQuote(string value) {
+    quote = value;
+}
+
+void ExchangeRate::setBid(double value) {
+    bid = value;
+}
+
+void ExchangeRate::setAsk(double value) {
+    ask = value;
+}
+
 void readExchangeRatesFromFile(string fileName, vector<ExchangeRate> &exchangeRates)
 {
     ifstream file(fileName.c_str());
@@ -21,12 +53,17 @@ void readExchangeRatesFromFile(string fileName, vector<ExchangeRate> &exchangeRa
     {
         istringstream ss(line);
         ExchangeRate exchangeRate;
+        string exchangeBase, exchangeQuote;
+        double exchangeBid, exchangeAsk;
         ss.ignore(256, delim);
-        getline(ss, exchangeRate.base, delim);
-        getline(ss, exchangeRate.quote, delim);
-        ss >> exchangeRate.bid; ss.ignore(256, delim);
-        ss >> exchangeRate.ask; ss.ignore(256, delim);
-
+        getline(ss, exchangeBase, delim);
+        exchangeRate.setBase(exchangeBase);
+        getline(ss, exchangeQuote, delim);
+        exchangeRate.setQuote(exchangeQuote);
+        ss >> exchangeBid; ss.ignore(256, delim);
+        exchangeRate.setBid(exchangeBid);
+        ss >> exchangeAsk; ss.ignore(256, delim);
+        exchangeRate.setAsk(exchangeAsk);
         if(ss)
             exchangeRates.push_back(exchangeRate);
     }
