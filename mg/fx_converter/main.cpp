@@ -12,13 +12,13 @@ int main(){
     double mon;
     string  curr_from;
     string curr_to;
-    vector <string> currencies; 
+    vector <Currency> currencies; 
     vector <ExchangeRate> vec;
 
 //- loads currencies information from a CSV file
 //- loads exchange rates from a CSV file 
    
-    getFileContent("back-to-cpp/datasets/currencies.csv");
+    getFileContent("back-to-cpp/datasets/currencies.csv",currencies);
     getExchange("back-to-cpp/datasets/exchange_rates.csv", vec);
 
 

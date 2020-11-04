@@ -61,4 +61,4 @@ class Currency{
 };
 
 
-bool getFileContent(string fileName);
+bool getFileContent(string fileName,vector<Currency> &vec);
