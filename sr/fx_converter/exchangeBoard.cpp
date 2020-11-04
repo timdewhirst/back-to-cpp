@@ -13,9 +13,17 @@ void displayRates(vector<ExchangeRate> & exchangeRates)
 }
 
 double convertToUSD(vector<ExchangeRate> &rates, string &base, string &quote, double amount){
-    //If userQuote does not have Base USD(Convert Amount*Ask)
-    //If userQuote does have Base USD (Convert Amount*1/Ask)
-    //If Quote USD Return Amount
+    for(int i=0; i<rates.size(); i++) 
+    {
+        if(rates[i].getBase()==quote && rates[i].getQuote()==base) 
+        {   
+            amount = amount * (1/rates[i].getAsk());
+        }
+        else if (rates[i].getBase()==base && rates[i].getQuote()==quote)
+        {
+            amount = amount * (rates[i].getAsk());
+        }
+    }
     return amount;
 }
 //ELSE && quote !USD
@@ -31,7 +39,7 @@ double exchange(vector<ExchangeRate> &rates, string &base, string &quote, double
         double usdAmount;
         usdAmount = convertToUSD(rates, base, quote, amount);
         if(quote == "USD") {
-            return usdAmount;
+            amount = usdAmount;
         }
         else {
             return convertFromUSD(rates, base, quote, usdAmount);
@@ -40,4 +48,5 @@ double exchange(vector<ExchangeRate> &rates, string &base, string &quote, double
     else if (base == "USD") {
         return convertFromUSD(rates, base, quote, amount);
     }
+    return amount;
 }
