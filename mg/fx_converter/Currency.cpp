@@ -54,9 +54,3 @@ bool getFileContent(string fileName,vector<Currency> &vec)
     return true;
     
 }
-
-int main(){
-    vector<Currency> currencies;
-    getFileContent("/home/margon/projects/firstProject/back-to-cpp/datasets/currencies.csv",currencies);
-    cout<<"Size: "<<currencies.size()<<endl;
-}

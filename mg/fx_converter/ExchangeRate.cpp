@@ -65,9 +65,7 @@ bool getExchange(string fileName, vector<ExchangeRate> &vec)
 
                 vec.push_back(ex_rate);
                 //ex_board(vec)
-        }
-        cout<<ex_rate.getBase()<<"------------------------------"<<endl;
-        
+        }        
     } 
     ;
     //Close The File
@@ -76,8 +74,3 @@ bool getExchange(string fileName, vector<ExchangeRate> &vec)
     
 }
 
-int main(){
-    vector<ExchangeRate> ex_rates;
-    getExchange("/home/margon/projects/firstProject/back-to-cpp/datasets/exchange_rates.csv",ex_rates);
-    cout<<"Size: "<<ex_rates.size()<<endl;
-}
