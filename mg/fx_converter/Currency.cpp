@@ -1,4 +1,3 @@
-#include "Currency.hpp"
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -6,7 +5,9 @@
 #include <string>
 using namespace std;
 
-bool getFileContent(string fileName)
+#include "Currency.hpp"
+
+bool getFileContent(string fileName,vector<Currency> &vec)
 {
     // Open the File
     ifstream file(fileName.c_str());
@@ -19,38 +20,43 @@ bool getFileContent(string fileName)
     string str;
     string element;
     vector<string> outside;
+
     // Read the next line from File untill it reaches the end.
-    
     string line;
-    const char delim = ',';
+    getline(file,line);
     while(getline(file,line))
     {
         istringstream ss(line);
         Currency currency;
-        ss.read((char*)&currency, sizeof(currency));
+        //ss.read((char*)&currency, sizeof(currency));
         
         for (int i = 0; i < 4; i++){
             getline(ss, line, ',');
-            if (i=0){
+            if (i==0){
                 currency.setName(line);
             }
-            else if(i=1){
-               
+            else if(i==1){
                 currency.setCode(line);
             }
-            else if(i=2){ 
-                currency.setNumericCode(stoi(line));
+            else if(i==2){ 
+                currency.setNumericCode(std::stoi(line));
             }
-            else if(i=3){ 
-                currency.setNumericCode(stoi(line));
+            else if(i==3){ 
+                currency.setMinorUnit(std::stoi(line));
             }
-        //if (ss)
-            //vec.push_back(currency);
-    }
+        if (ss)
+            vec.push_back(currency);
+        }
     
     }  
     //Close The File
     file.close();
     return true;
     
+}
+
+int main(){
+    vector<Currency> currencies;
+    getFileContent("/home/margon/projects/firstProject/back-to-cpp/datasets/currencies.csv",currencies);
+    cout<<"Size: "<<currencies.size()<<endl;
 }

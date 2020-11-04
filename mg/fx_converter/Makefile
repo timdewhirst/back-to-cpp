@@ -1,8 +1,8 @@
 all: main.exe
 
 main.exe: main.o Currency.o  ExchangeRate.o ExchangeBoard.o
-	g++ -o main.exe main.o Currency.o  ExchangeRate.o ExchangeBoard.o
-
+	g++ -o main.exe main.o Currency.o  ExchangeRate.o ExchangeBoard.o 
+	
 main.o: main.cpp 
 	g++ -g -c main.cpp
 

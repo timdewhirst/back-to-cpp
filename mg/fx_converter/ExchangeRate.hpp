@@ -1,5 +1,8 @@
 #pragma once
+
 #include <iostream>
+#include <string>
+#include <vector>
 using namespace std;
 //## Class __ExchangeRate__
 
@@ -19,7 +22,7 @@ class ExchangeRate{
         double last;
 
     public:
-        ExchangeRate();
+        ExchangeRate() {}
 
 //Constructor
     ExchangeRate(string new_currency,string new_base, string new_quote, double new_bid, double new_ask, double new_last){
@@ -29,6 +32,14 @@ class ExchangeRate{
             bid= new_bid;
             ask= new_ask;
             last= new_last;
+    }
+//getCurrency to get code attribute
+   string getCurrency (){
+        return currency;
+    }
+//setCurency to set real part
+    void setCurrency(string new_currency){
+        currency=new_currency;
     }
 
 //getBase to get code attribute
@@ -76,3 +87,5 @@ class ExchangeRate{
        last=new_last;
     }
 };
+
+bool getExchange(string fileName, vector<ExchangeRate> &vec);

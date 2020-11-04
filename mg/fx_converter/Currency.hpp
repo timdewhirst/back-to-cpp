@@ -1,6 +1,8 @@
 #pragma once
-#include <iostream>
+
 using namespace std;
+#include <string>
+#include <vector>
 //## Class __Currency__
 
 class Currency{
@@ -10,7 +12,7 @@ class Currency{
         int numeric_code;
         int minor_unit;
     public:
-        Currency();
+        Currency() {}
 
 //Constructor
     Currency(string new_name, string new_code, int new_numeric_code,int minor_unit){
@@ -57,3 +59,6 @@ class Currency{
     }
 
 };
+
+
+bool getFileContent(string fileName);

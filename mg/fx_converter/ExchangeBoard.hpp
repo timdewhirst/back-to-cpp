@@ -1,8 +1,12 @@
 #pragma once
+
 #include <iostream>
 #include <vector>
-#include "ExchangeRate.hpp"
+#include <string>
 using namespace std;
+
+#include "ExchangeRate.hpp"
+
 //## Class __ExchangeBoard__
 
 //- list of ExchangeRates
@@ -11,13 +15,13 @@ using namespace std;
 
 class ExchangeBoard{
     private:
-        vector<ExchangeRate>& exchangeRates;   
+        vector<ExchangeRate> exchangeRates;   
     public:
         bool didExchange=false;
-        ExchangeBoard();
+        ExchangeBoard() {}
 
 //Constructor
-/*ExchangeBoard(vector<ExchangeRate>& new_exchageRates){
+/*ExchangeBoard(vector<ExchangeRate> new_exchageRates){
             exchangeRates= new_exchageRates;
 }
 */
@@ -32,3 +36,4 @@ class ExchangeBoard{
     }*/
 
 };
+bool corr_mon(vector <ExchangeRate> &vec,string &curr_from, string &curr_to,double &mon);

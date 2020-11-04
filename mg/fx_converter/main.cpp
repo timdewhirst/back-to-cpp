@@ -1,12 +1,11 @@
+#include <iostream>
+using namespace std;
+
 #include "Currency.hpp"
-#include "Currency.cpp"
 #include "CurrencyContainers.hpp"
 #include "ExchangeBoard.hpp"
-#include "ExchangeBoard.cpp"
 #include "ExchangeRate.hpp"
-#include "ExchangeRate.cpp"
 
-using namespace std;
 
 int main(){
     
@@ -23,19 +22,17 @@ int main(){
     getExchange("back-to-cpp/datasets/exchange_rates.csv", vec);
 
 
-
-    cout<<currencies.size();
 //- asks for amount and currency to exchange from
     cout<<"How much money out?\n";
     cin>> mon;
     //mon=50;
     
-    cout<<"Which currency to exchange from?\n\n";
+    cout<<"Which currency to exchange from?\n";
     cin>> curr_from;
     //curr_from="BRL";
 //- asks for currency to exchange to
     
-    cout<<"Which currency to exchange to?\n\n";
+    cout<<"Which currency to exchange to?\n";
     //curr_to="GBP";
     cin>> curr_to;
     

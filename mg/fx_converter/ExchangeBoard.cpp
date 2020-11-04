@@ -11,17 +11,19 @@ bool corr_mon(vector <ExchangeRate> &vec,string &curr_from, string &curr_to,doub
     double quote_rate;
     double conversion;
 
-    find(vec.begin(),vec.end(),curr_from);
+    //find(vec.begin(),vec.end(),curr_from);
     
 
     for(int i=0; i<vec.size();i++){
         cout<<vec[i].getBase()<<endl;
         
         if ((vec[i].getBase()==curr_from)){
+            cout<<curr_from<<endl;
             corr_base= true;
             base_rate= vec[i].getBid();
         }
         if(vec[i].getQuote()==curr_to){
+            cout<<curr_to<<endl;
             corr_quote=true;
             quote_rate= vec[i].getAsk();
         }
