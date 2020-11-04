@@ -1,10 +1,11 @@
-#include "currency.hpp"
-#include "exchangeRate.hpp"
-#include "exchangeBoard.hpp"
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <string>
+
+#include "currency.hpp"
+#include "exchangeRate.hpp"
+#include "exchangeBoard.hpp"
 
 using namespace std;
 
@@ -29,7 +30,7 @@ int main()
         displayRates(exchangeRates);
     }
     cout << "Enter the currency code (e.g. USD) you wish to trade: " << endl;
-    cin >> userCurrency;
+    cin >> userCurrency; 
     cout << "Please enter the amount you wish to trade: " << endl;
     cin >> userAmount;
     cout << "Please enter the currency code (e.g. USD) you wish to convert to: " << endl;
