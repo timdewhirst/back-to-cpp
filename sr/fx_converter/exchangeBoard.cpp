@@ -4,49 +4,58 @@
 
 #include "exchangeBoard.hpp"
 
-void displayRates(vector<ExchangeRate> & exchangeRates)
+void displayRates(const vector<ExchangeRate> &exchangeRates)
 {
-    for ( size_t i = 0; i < exchangeRates.size(); ++i ) 
+    for ( int i = 0; i < exchangeRates.size(); ++i ) 
     {
         cout << "Currency: " << exchangeRates[i].getBase() << "/" << exchangeRates[i].getQuote() << " Bid: " << exchangeRates[i].getBid() << " Ask: " << exchangeRates[i].getAsk() << endl;
     }
 }
 
-double convertToUSD(vector<ExchangeRate> &rates, string &base, string &quote, double amount){
+double convertToIntermediary(const vector<ExchangeRate> &rates, const string &base, const string &quote, double amount, const string &intermediary){
     for(int i=0; i<rates.size(); i++) 
     {
-        if(rates[i].getBase()==quote && rates[i].getQuote()==base) 
+        if(rates[i].getBase()==intermediary && rates[i].getQuote()==base) 
         {   
             amount = amount * (1/rates[i].getAsk());
         }
-        else if (rates[i].getBase()==base && rates[i].getQuote()==quote)
+        else if (rates[i].getBase()==base && rates[i].getQuote()==intermediary)
         {
             amount = amount * (rates[i].getAsk());
         }
     }
     return amount;
 }
-//ELSE && quote !USD
-double convertFromUSD(vector<ExchangeRate> &rates, string &base, string &quote, double amount){
-    //If userQuote(USD) quote does have Base USD (Convert Amount*Ask)
-    //If userQuote(USD) does not have Base USD (Convert Amount *1/Ask)
+
+double convertFromIntermediary(const vector<ExchangeRate> &rates, const string &base, const string &quote, double amount, const string &intermediary){
+    for(int i=0; i<rates.size(); i++) 
+    {
+        if(rates[i].getBase()==quote && rates[i].getQuote()==intermediary) 
+        {   
+            amount = amount * (1/rates[i].getAsk());
+        }
+        else if (rates[i].getBase()==intermediary && rates[i].getQuote()==quote)
+        {
+            amount = amount * (rates[i].getAsk());
+        }
+    }
     return amount;
 }
 
-double exchange(vector<ExchangeRate> &rates, string &base, string &quote, double amount)
+double exchange(const vector<ExchangeRate> &rates, const string &base, const string &quote, double amount, const string &intermediary)
 {
-    if(base != "USD") {
-        double usdAmount;
-        usdAmount = convertToUSD(rates, base, quote, amount);
-        if(quote == "USD") {
-            amount = usdAmount;
+    if(base != intermediary) {
+        double intermediaryAmount;
+        intermediaryAmount = convertToIntermediary(rates, base, quote, amount, intermediary);
+        if(quote == intermediary) {
+            amount = intermediaryAmount;
         }
         else {
-            return convertFromUSD(rates, base, quote, usdAmount);
+            return convertFromIntermediary(rates, base, quote, intermediaryAmount, intermediary);
         }
     }
-    else if (base == "USD") {
-        return convertFromUSD(rates, base, quote, amount);
+    else if (base == intermediary) {
+        return convertFromIntermediary(rates, base, quote, amount, intermediary);
     }
     return amount;
 }

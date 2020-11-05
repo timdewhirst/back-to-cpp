@@ -17,10 +17,10 @@ class ExchangeRate
         ExchangeRate() : base {""}, quote {""}, bid{0}, ask{0} {};
         ~ExchangeRate() {};
 
-        string getBase();
-        string getQuote();
-        double getBid();
-        double getAsk();
+        string getBase() const;
+        string getQuote() const;
+        double getBid() const;
+        double getAsk() const;
 
         void setBase(string value);
         void setQuote(string value);
@@ -28,4 +28,4 @@ class ExchangeRate
         void setAsk(double value);
 };
 
-        void readExchangeRatesFromFile(string fileName, vector<ExchangeRate> &exchangeRates);
+        void readExchangeRatesFromFile(const string fileName, vector<ExchangeRate> &exchangeRates);

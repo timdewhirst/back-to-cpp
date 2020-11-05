@@ -8,15 +8,15 @@
 
 using namespace std;
 
-string Currency::getCode() {
+string Currency::getCode() const{
     return code;
 }
 
-string Currency::getName() {
+string Currency::getName() const {
     return name;
 }
 
-int Currency::getNumerice_code() {
+int Currency::getNumerice_code() const{
     return numeric_code;
 }
 
@@ -32,7 +32,7 @@ void Currency::setNumerice_code(int value) {
     numeric_code = value;
 }
 
-void readCurrenciesFromFile(string fileName, vector<Currency> &currencies) 
+void readCurrenciesFromFile(const string fileName, vector<Currency> &currencies) 
 {
     ifstream file(fileName.c_str());
     if(!file) 

@@ -15,12 +15,12 @@ class Currency
         Currency() : code{""}, name{""}, numeric_code{0} {};
         ~Currency() {};
 
-        string getCode();
-        string getName();
-        int getNumerice_code();
+        string getCode() const;
+        string getName() const;
+        int getNumerice_code() const;
         void setCode(string value);
         void setName(string value);
         void setNumerice_code(int value);
 };
 
-        void readCurrenciesFromFile(string fileName, vector<Currency> &currencies);
+        void readCurrenciesFromFile(const string fileName, vector<Currency> &currencies);

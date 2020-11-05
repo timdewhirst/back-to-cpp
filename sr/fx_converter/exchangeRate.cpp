@@ -8,19 +8,19 @@
 
 using namespace std;
 
-string ExchangeRate::getBase() {
+string ExchangeRate::getBase() const{
     return base;
 }
 
-string ExchangeRate::getQuote() {
+string ExchangeRate::getQuote() const{
     return quote;
 }
 
-double ExchangeRate::getBid() {
+double ExchangeRate::getBid() const{
     return bid;
 }
 
-double ExchangeRate::getAsk() {
+double ExchangeRate::getAsk() const{
     return ask;
 }
 
@@ -40,7 +40,7 @@ void ExchangeRate::setAsk(double value) {
     ask = value;
 }
 
-void readExchangeRatesFromFile(string fileName, vector<ExchangeRate> &exchangeRates)
+void readExchangeRatesFromFile(const string fileName, vector<ExchangeRate> &exchangeRates)
 {
     ifstream file(fileName.c_str());
     if (!file)
@@ -56,7 +56,6 @@ void readExchangeRatesFromFile(string fileName, vector<ExchangeRate> &exchangeRa
         ExchangeRate exchangeRate;
         string exchangeBase, exchangeQuote;
         double exchangeBid, exchangeAsk;
-        ss.ignore(256, delim);
         getline(ss, exchangeBase, delim);
         exchangeRate.setBase(exchangeBase);
         getline(ss, exchangeQuote, delim);
