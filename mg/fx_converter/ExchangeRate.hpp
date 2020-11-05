@@ -14,7 +14,6 @@ using namespace std;
 
 class ExchangeRate{
     private:
-        string currency;
         string base;
         string quote;
         double bid;
@@ -24,68 +23,58 @@ class ExchangeRate{
     public:
         ExchangeRate() {}
 
-//Constructor
-    ExchangeRate(string new_currency,string new_base, string new_quote, double new_bid, double new_ask, double new_last){
-            currency=new_currency;
+    ExchangeRate(string new_base, string new_quote, double new_bid, double new_ask, double new_last){
             base= new_base;
             quote= new_quote;
             bid= new_bid;
             ask= new_ask;
             last= new_last;
     }
-//getCurrency to get code attribute
-   string getCurrency (){
-        return currency;
-    }
-//setCurency to set real part
-    void setCurrency(string new_currency){
-        currency=new_currency;
-    }
 
-//getBase to get code attribute
    string getBase (){
         return base;
     }
-//setBase to set real part
+
     void setBase(string new_base){
         base=new_base;
     }
 
-//getQuote to get code attribute
+
     string getQuote (){
         return quote;
     }
-//setQuote to set real part
+
     void setQuote(string new_quote){
         quote=new_quote;
     }
 
-//getBid to get code attribute
+
     double getBid (){
+
         return bid;
     }
-//setBid to set real part
-    void setBid(int new_bid){
+
+    void setBid(double new_bid){
         bid=new_bid;
     }
 
-//getAsk to get code attribute
+
     double getAsk (){
         return ask;
     }
-//setAsk to set real part
-    void setAsk(int new_ask){
+
+    void setAsk(double new_ask){
        ask=new_ask;
     }
 
-//getLast to get code attribute
+
     double getLast (){
         return last;
     }
-//setLast to set real part
-    void setLast(int new_last){
+
+    void setLast(double new_last){
        last=new_last;
     }
 };
 
-bool getExchange(string fileName, vector<ExchangeRate> &vec);
+bool const getExchange(const string fileName,  unordered_map<string, unordered_map<string,double>> &umap, unordered_map<string, unordered_map<string,double>> &um_ask);
