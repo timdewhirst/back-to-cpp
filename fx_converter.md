@@ -35,6 +35,32 @@ Main application is __Converter app__, which is a console application with the f
 
 ## Threading and simulation of random walk
 
-A new thread at random time intervals updates EUR/USD using a random walk. 
-A new thread is "listening" for EUR/JPY quote change, and then updates EUR/JPY, as well as other currencies that have JPY in FX pair.
-Main thread is running main fx conversion program. Remember, that by the time user inputs all conversion details, the rate could be different.
+- Thread #1. The thread at random time intervals updates EUR/JPY using a random walk. Price change is caculated using the following formula:
+  
+  $price\_change=\exp^x$
+
+  $x=\frac{0.05}{\sqrt{\frac{24\times60\times60}{t}}}\times{rand()\times{10^{-4}}}$, where
+
+  $t$ - time in seconds since the last price change  
+  $0.05$ - daily EUR/JPY volatility  
+  $rand()$ - a function that returns a random value from a uniform distribution between [0, 1]
+
+  Both __Bid__ and __Ask__ are updated with the same price change.
+
+  Price updates are done at random time steps. The length of each time step is between 2-5 seconds.
+
+  This thread will simulate a quote change captured from the market.
+
+- Thread #2. The thread is "listening" for EUR/JPY quote change, and then updates EUR/JPY, as well as other currencies that have JPY in FX pair.
+
+  This thread is responsible for updating all currency pairs that have JPY. This is done to simulate that other currencies update in the market so that there is no arbitrage opportunity.
+
+- Thread #3. Main thread is running main fx conversion program. Remember, that by the time user inputs all conversion details, the rate could be different.
+
+  This is the main thread, that starts threads #1 and #2 and then runs the main program logic - currency conversion. It asks for currency to convert from, currency convert to, amount, then displays the following line (considering EUR, JPY, 100 was inputted, and EUR/JPY rate is 140.00) and asks for Y/N input.
+
+  100 EUR -> 14000 JPY @ EUR/JPY 140.00. Do you confirm? (Y/N)
+
+  If rate changes while program is waiting for user input, the line above must be updated accordingly (the previous line is replaced), e.g.:
+
+  100 EUR -> 14010 JPY @ EUR/JPY 140.10. Do you confirm? (Y/N)
