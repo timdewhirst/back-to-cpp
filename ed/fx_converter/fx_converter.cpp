@@ -5,6 +5,7 @@
 #include <thread>
 #include <mutex>
 #include <chrono>
+#include <string>
 #include "exchange_board.hpp"
 #include "exchange_rate.hpp"
 #include "random_walk.hpp"
@@ -14,9 +15,17 @@ using namespace std;
 int main()
 {
     thread th1(gen_price_change);
+    string ccy1, ccy2;
 
+    // g_random_walk_mutex.lock();
+    // cout << "What currency?: ";
+    // cin >> ccy1;
+    // g_random_walk_mutex.unlock();
+
+    g_random_walk_mutex.lock();
     cout << "Main thread will sleep for 5 seconds" << endl;
-    
+    g_random_walk_mutex.unlock();
+
     this_thread::sleep_for(chrono::seconds(5));
 
     // ExchangeBoard board;
@@ -37,6 +46,6 @@ int main()
     g_random_walk_mutex.lock();
     g_run_random_walk = false;
     g_random_walk_mutex.unlock();
-    
+
     th1.join();
 }
