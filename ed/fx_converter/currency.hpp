@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CURRENCY_HPP
+#define CURRENCY_HPP
+
 #include <string>
 
 using namespace std;
@@ -18,3 +20,5 @@ public:
     const string& code() const { return m_code; }
     int numeric_code() const { return m_numeric_code; }
 };
+
+#endif
