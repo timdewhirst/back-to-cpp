@@ -37,12 +37,12 @@ Main application is __Converter app__, which is a console application with the f
 
 - Thread #1. The thread at random time intervals updates EUR/JPY using a random walk. Price change is caculated using the following formula:
   
-  $price\_change=\exp^x$
+  $price\_change=\exp^x-1$
 
-  $x=\frac{0.05}{\sqrt{\frac{24\times60\times60}{t}}}\times{rand()\times{10^{-4}}}$, where
+  $x=\frac{0.10}{\sqrt{\frac{24\times60\times60}{t}}}\times{(rand() - 0.5)\times{4}}$, where
 
   $t$ - time in seconds since the last price change  
-  $0.05$ - daily EUR/JPY volatility  
+  $10\%$ - daily EUR/JPY volatility  
   $rand()$ - a function that returns a random value from a uniform distribution between [0, 1]
 
   Both __Bid__ and __Ask__ are updated with the same price change.

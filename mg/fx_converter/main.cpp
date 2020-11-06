@@ -1,5 +1,4 @@
 #include <iostream>
-#include <unordered_map>
 using namespace std;
 
 #include "Currency.hpp"
@@ -14,31 +13,31 @@ int main(){
     string  curr_from;
     string curr_to;
     vector <Currency> currencies; 
-    unordered_map<string, unordered_map<string,double>> um_bid;
-    unordered_map<string, unordered_map<string,double>> um_ask;
+    vector <ExchangeRate> vec;
 
 //- loads currencies information from a CSV file
 //- loads exchange rates from a CSV file 
    
-    getFileContent("/home/margon/projects/firstProject/back-to-cpp/datasets/currencies.csv",currencies);
-    getExchange("/home/margon/projects/firstProject/back-to-cpp/datasets/exchange_rates.csv", um_bid,um_ask);
+    getFileContent("back-to-cpp/datasets/currencies.csv",currencies);
+    getExchange("back-to-cpp/datasets/exchange_rates.csv", vec);
 
 
 //- asks for amount and currency to exchange from
     cout<<"How much money out?\n";
-    //cin>> mon;
-    mon=50;
+    cin>> mon;
+    //mon=50;
     
     cout<<"Which currency to exchange from?\n";
-    //cin>> curr_from;
-    curr_from="BRL";
+    cin>> curr_from;
+    //curr_from="BRL";
 //- asks for currency to exchange to
     
     cout<<"Which currency to exchange to?\n";
-    curr_to="GBP";
-    //cin>> curr_to;
+    //curr_to="GBP";
+    cin>> curr_to;
     
-    corr_mon(um_bid,um_ask,curr_from,curr_to,mon);
+    corr_mon(vec,curr_from,curr_to,mon);
+
 
     return 0;
 }
