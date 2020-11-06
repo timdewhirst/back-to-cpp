@@ -16,7 +16,7 @@ int main()
     string intermediary;
     double userAmount;
     double convertedAmount;
-    vector<ExchangeRate> exchangeRates;
+    unordered_map<string, ExchangeRate> exchangeRates;
     vector<Currency> currencies;
     
     readExchangeRatesFromFile("/home/stephen/projects/back-to-cpp/datasets/exchange_rates.csv", exchangeRates);
@@ -28,12 +28,13 @@ int main()
     cin >> userAmount;
     cout << "Please enter the currency code (e.g. USD) you wish to convert to: " << endl;
     cin >> convertedCurrency;
-    
-    intermediary = "USD";
 
+    intermediary = findIntermediary(exchangeRates, userCurrency, convertedCurrency);
+    cout << intermediary << endl;
+/*
     convertedAmount = exchange(exchangeRates, userCurrency, convertedCurrency, userAmount, intermediary);
 
     cout << "You have exchanged " << userAmount << " " << userCurrency << " for " << convertedAmount << " " << convertedCurrency << "." << endl;
-
+*/
     return 0;
 }

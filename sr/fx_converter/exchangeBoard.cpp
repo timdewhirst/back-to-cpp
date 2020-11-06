@@ -4,15 +4,28 @@
 
 #include "exchangeBoard.hpp"
 
-void displayRates(const vector<ExchangeRate> &exchangeRates)
-{
-    for ( int i = 0; i < exchangeRates.size(); ++i ) 
+string findIntermediary(const unordered_map<string, ExchangeRate> &rates, const string &base, const string &quote){
+    auto i1 = rates.find(base+quote); 
+    auto i2 = rates.find(quote+base); 
+    string intermediary;
+    if (i1 == rates.end())
     {
-        cout << "Currency: " << exchangeRates[i].getBase() << "/" << exchangeRates[i].getQuote() << " Bid: " << exchangeRates[i].getBid() << " Ask: " << exchangeRates[i].getAsk() << endl;
+        intermediary= i2->second.getQuote();
+    } 
+    else if(i2 == rates.end()) 
+    { 
+        intermediary= i1->second.getQuote();
+    } 
+    else if(i1==rates.end() && i2==rates.end())
+    {
+        cout << "Cannot find currency pair";
     }
+    
+return intermediary;
+    
 }
-
-double convertToIntermediary(const vector<ExchangeRate> &rates, const string &base, const string &quote, double amount, const string &intermediary){
+/*
+double convertToIntermediary(const unordered_map<string, ExchangeRate> &rates, const string &base, const string &quote, double amount, const string &intermediary){
     for(int i=0; i<rates.size(); i++) 
     {
         if(rates[i].getBase()==intermediary && rates[i].getQuote()==base) 
@@ -27,7 +40,7 @@ double convertToIntermediary(const vector<ExchangeRate> &rates, const string &ba
     return amount;
 }
 
-double convertFromIntermediary(const vector<ExchangeRate> &rates, const string &base, const string &quote, double amount, const string &intermediary){
+double convertFromIntermediary(const unordered_map<string, ExchangeRate> &rates, const string &base, const string &quote, double amount, const string &intermediary){
     for(int i=0; i<rates.size(); i++) 
     {
         if(rates[i].getBase()==quote && rates[i].getQuote()==intermediary) 
@@ -42,7 +55,7 @@ double convertFromIntermediary(const vector<ExchangeRate> &rates, const string &
     return amount;
 }
 
-double exchange(const vector<ExchangeRate> &rates, const string &base, const string &quote, double amount, const string &intermediary)
+double exchange(const unordered_map<string, ExchangeRate> &rates, const string &base, const string &quote, double amount, const string &intermediary)
 {
     if(base != intermediary) {
         double intermediaryAmount;
@@ -59,3 +72,4 @@ double exchange(const vector<ExchangeRate> &rates, const string &base, const str
     }
     return amount;
 }
+*/
