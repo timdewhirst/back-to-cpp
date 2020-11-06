@@ -36,4 +36,4 @@ class ExchangeBoard{
     }*/
 
 };
-bool corr_mon(vector <ExchangeRate> &vec,string &curr_from, string &curr_to,double &mon);
+bool const corr_mon(unordered_map<string, unordered_map<string,double>> &bid,unordered_map<string, unordered_map<string,double>> &ask,const string &curr_from, const string &curr_to, const double &mon);
