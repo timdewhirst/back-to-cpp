@@ -38,7 +38,7 @@ int main(){
     curr_to="GBP";
     //cin>> curr_to;
     
-    //corr_mon(vec,curr_from,curr_to,mon);
+    corr_mon(um_bid,um_ask,curr_from,curr_to,mon);
 
     return 0;
 }
