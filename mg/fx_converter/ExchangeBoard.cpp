@@ -1,7 +1,25 @@
-#include "ExchangeRate.hpp"
 #include <vector>
+#include <unordered_map>
 #include <algorithm>
 
+#include "ExchangeRate.hpp"
+
+double const if_ask(unordered_map<string, unordered_map<string,double>> &ask,  const string &curr_from, const string &curr_to,const double &amount){
+    for(const auto& elem:ask){
+        for(const auto& quote:elem.second){
+            if((elem.first==curr_from)&&(quote.first==curr_to)){
+                return(amount*quote.second);
+            }else{
+                return 0;
+            }
+        }
+    }
+}
+
+
+double conv from intermediary(){
+    
+};
 
 double const if_ask(unordered_map<string, unordered_map<string,double>> &ask,  const string &curr_from, const string &curr_to,const double &amount){
     for(const auto& elem:ask){
@@ -30,8 +48,14 @@ bool const corr_mon(unordered_map<string, unordered_map<string,double>> &bid,uno
 
     //Check if conversion can be done
     for(const auto& elem:bid){
-                if (){
-                conversion=amount*quote.second;}
+        for(const auto& quote:elem.second){
+            if(elem.first==curr_from){
+                if (quote.first==curr_to){
+                    conversion=amount*quote.second;
+                }
+                else if (quote.first!=curr_to){
+                    
+                }
             }
             if(elem.first==curr_to)
             else if((elem.first==curr_from)&&(quote.first!=curr_to)){
@@ -45,22 +69,23 @@ bool const corr_mon(unordered_map<string, unordered_map<string,double>> &bid,uno
 
 /*
     //find(vec.begin(),vec.end(),curr_from);
-    
+   for(int i=0; i<umap.size();i++){
+     
 
-        cout<<vec[i].getBase()<<endl;
-        
-        if ((vec[i].getBase()==curr_from)){
-            cout<<curr_from<<endl;
+        //cout<<vec[i].getBase()<<endl;
+        cout<<umap.size()<<endl;
+        if ((umap[i].getBase()==curr_from)){
+            //cout<<curr_from<<endl;
             corr_base= true;
-            base_rate= vec[i].getBid();
+            base_rate= umap[i].getBid();
         }
-        if(vec[i].getQuote()==curr_to){
-            cout<<curr_to<<endl;
+        if(umap[i].getQuote()==curr_to){
+            //cout<<curr_to<<endl;
             corr_quote=true;
-            quote_rate= vec[i].getAsk();
+            quote_rate= umap[i].getAsk();
         }
     }
-
+*/
     if((corr_base=true)&&(corr_quote=true)){
         conversion=amount * base_rate * quote_rate;
         cout<<"Converting "<<amount<<" "<<curr_from<<" into "<<curr_to;
