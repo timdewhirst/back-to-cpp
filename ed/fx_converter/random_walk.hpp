@@ -1,11 +1,8 @@
 #ifndef RANDOM_WALK_HPP
 #define RANDOM_WALK_HPP
 
-#include <mutex>
+#include <atomic>
 
-extern std::mutex g_random_walk_mutex;
-extern bool g_run_random_walk;
-
-void gen_price_change();
+void quote_change(std::atomic<bool> &keep_running);
 
 #endif

@@ -7,7 +7,9 @@ OBJS = \
 	exchange_rate.o \
 	currency.o \
 	exchange_board.o \
-	random_walk.o
+	random_walk.o \
+	board_updater.o \
+	globals.o
 
 # $@ - target
 # $^ - dependencies
