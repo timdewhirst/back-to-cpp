@@ -20,4 +20,4 @@ class ExchangeBoard{
         ExchangeBoard() {}
 
 };
-bool const corr_mon(unordered_map<string, unordered_map<string,double>> &ubid,unordered_map<string, unordered_map<string,double>> &uask,const string &curr_from, const string &curr_to, const double &amount);
+double const corr_mon(unordered_map<string, unordered_map<string,double>> &ubid,unordered_map<string, unordered_map<string,double>> &uask,const string &curr_from, const string &curr_to, const double &amount);

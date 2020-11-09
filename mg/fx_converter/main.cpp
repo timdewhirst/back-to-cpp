@@ -31,7 +31,7 @@ int main(){
     
     cout<<"Which currency to exchange from?\n";
     //cin>> curr_from;
-    curr_from="CAD";
+    curr_from="USD";
 //- asks for currency to exchange to
     
     cout<<"Which currency to exchange to?\n";

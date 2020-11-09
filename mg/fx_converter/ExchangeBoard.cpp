@@ -85,15 +85,18 @@ double const corr_mon(unordered_map<string, unordered_map<string,double>> &ubid,
     }*/
 
     //Check if invalid input and conversion to be done
+    int j=0;
     for(const auto& base:ubid){
+        j++;
+        int k=0;
         for(const auto& quote:base.second){
-          
+            k++;
             //Check if currency from is a base currency
             if(curr_from==base.first){
                 if (quote.first==curr_to){
                     convers=amount*quote.second;
                     curr_to_amount[curr_to]=convers;
-                    cout<<amount<<" "<<quote.second<<endl;
+                    cout<<amount<<" "<<quote.first<<endl;
                 }
                 else if (quote.first!=curr_to){
                     if (find(base_curr.begin(),base_curr.end(),quote.first)!=base_curr.end()){
@@ -110,9 +113,9 @@ double const corr_mon(unordered_map<string, unordered_map<string,double>> &ubid,
             //Check if currency from is a quote currency
             if(curr_from==quote.first){
                 if(base.first==curr_to){
-                    convers=amount*uask[curr_from][curr_to];
+                    convers=amount*uask[base.first][quote.first];
                     curr_to_amount[base.first]=convers;
-                    cout<<amount<<"aaaa "<<uask[curr_from][curr_to]<<endl;
+                    cout<<amount<<"aaaa "<<uask[base.first][quote.first]<<endl;
                     cout<<convers<<endl;
                     cout<<curr_to_amount[base.first]<<endl;
                 }
@@ -120,7 +123,7 @@ double const corr_mon(unordered_map<string, unordered_map<string,double>> &ubid,
                     if (find(base_curr.begin(),base_curr.end(),quote.first)!=base_curr.end()){
                         convers=intermed(ubid,uask,curr_from,quote.first,curr_to, amount,"n");
                         curr_to_amount[quote.first]=convers;
-                        cout<<amount<<" ppppp"<<quote.second<<endl;
+                        cout<<amount<<" ppppp"<<uask[0][1]<<endl;
                         cout<<convers<<endl;
                         cout<<curr_to_amount[quote.first]<<endl;
                     }
