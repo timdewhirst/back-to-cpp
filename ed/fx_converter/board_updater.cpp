@@ -21,9 +21,12 @@ void update_board(atomic<bool> &keep_running)
 
         g_cv_newquote.wait_for(ul, chrono::seconds(1));
 
-        g_mutex_cout.lock();
-        cout << "BoardUpdater thread: Last quote " << g_last_quote << endl;
-        g_mutex_cout.unlock();
+        if (keep_running)
+        {
+            g_mutex_cout.lock();
+            cout << '\r' << "BoardUpdater thread: Last quote " << g_last_quote << flush;
+            g_mutex_cout.unlock();
+        }
     }
 
     g_mutex_cout.lock();

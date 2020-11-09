@@ -36,13 +36,9 @@ void quote_change(atomic<bool> &keep_running)
     {
         g_last_quote = g_last_quote * exp(0.10 / sqrt(24.0 * 60.0 * 60.0) * rand_between(-1.0, 1.0) * 4);
 
-        g_mutex_cout.lock();
-        cout << "RandomWalk thread: new quote generated " << setprecision(8) << g_last_quote << endl;
-        g_mutex_cout.unlock();
-
         g_cv_newquote.notify_one();
 
-        this_thread::sleep_for(chrono::milliseconds(rand_between(1000, 3000)));
+        this_thread::sleep_for(chrono::milliseconds(rand_between(2000, 5000)));
     }
 
     g_mutex_cout.lock();
