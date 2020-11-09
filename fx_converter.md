@@ -42,13 +42,13 @@ Main application is __Converter app__, which is a console application with the f
   $x=\frac{0.10}{\sqrt{24\times60\times60}}\times{(rand() - 0.5)\times{4}}$
 
   $price\_change=new\_price - last\_price$
-  
-  where
 
-  - $new\_bid=last\_bid + price\_change$
-  - $new\_ask=last\_ask + price\_change$
-  - $0.10\ (10\%)$ - daily EUR/JPY volatility. The volatility is exaggerated in order to get more volatile price movements.
-  - $rand()$ - a function that returns a random value from a uniform distribution between [0, 1]. At this stage, due to simpler implementation, a uniform distribution is used for stochastic component of the random walk. $(rand() - 0.5) \times 2$ generates a value that is between [-1, 1], which is subsequently scaled by 2 (and hence, multiplication by 4).
+  $new\_bid=last\_bid + price\_change$
+
+  $new\_ask=last\_ask + price\_change$
+
+  > - $0.10\ (10\%)$ - daily EUR/JPY volatility. The volatility is exaggerated in order to get more volatile price movements.
+  > - $rand()$ - a function that returns a random value from a uniform distribution between [0, 1]. At this stage, due to simpler implementation, a uniform distribution is used for stochastic component of the random walk. $(rand() - 0.5) \times 2$ generates a value that is between [-1, 1], which is subsequently scaled by 2 (and hence, multiplication by 4).
 
   Price updates are done at random time steps. The length of each time step is between 2-5 seconds.
 
