@@ -30,11 +30,9 @@ int main()
     cin >> convertedCurrency;
 
     intermediary = findIntermediary(exchangeRates, userCurrency, convertedCurrency);
-    cout << intermediary << endl;
-/*
+
     convertedAmount = exchange(exchangeRates, userCurrency, convertedCurrency, userAmount, intermediary);
 
     cout << "You have exchanged " << userAmount << " " << userCurrency << " for " << convertedAmount << " " << convertedCurrency << "." << endl;
-*/
     return 0;
 }
