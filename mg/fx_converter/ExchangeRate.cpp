@@ -121,7 +121,13 @@ bool const getExchange(const string fileName,  unordered_map<string, unordered_m
 
         }      
     };
-    cout<<um_bid.size()<<endl;
+     /*for(const auto& base:um_bid){
+        for(const auto& quote:base.second){
+            cout<<"Base: "<<base.first<<endl;
+            cout<<"Quote:"<<quote.first<<endl;
+            }
+            }
+    cout<<um_ask.size()<<endl;*/
     //ExchangeBoard currency_bid = um_bid;
     
     //Close The File
