@@ -40,6 +40,7 @@ public:
 
     // If -1 is passed, then the corresponding quote is not updated
     void update(double bid = -1, double ask = -1);
+    ExchangeRate & update_all(float d);
 };
 
 #endif

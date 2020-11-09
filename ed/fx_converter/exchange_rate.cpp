@@ -19,3 +19,12 @@ void ExchangeRate::update(double bid, double ask)
     if (bid != -1) m_bid = bid;
     if (ask != -1) m_ask = ask;
 }
+
+ExchangeRate & ExchangeRate::update_all(float change)
+{
+    m_bid += change;
+    m_ask += change;
+    m_last += change;
+
+    return *this;
+}
