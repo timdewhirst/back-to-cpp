@@ -24,32 +24,33 @@ string findIntermediary(const unordered_map<string, ExchangeRate> &rates, const 
 return intermediary;
     
 }
-/*
 double convertToIntermediary(const unordered_map<string, ExchangeRate> &rates, const string &base, const string &quote, double amount, const string &intermediary){
-    for(int i=0; i<rates.size(); i++) 
+    auto i1 = rates.find(base+intermediary);
+    auto i2 = rates.find(intermediary+base);  
+
+    if(i1==rates.end()) 
+    {   
+        amount = amount * (1/i2->second.getAsk());
+    }
+    else if (i2==rates.end())
     {
-        if(rates[i].getBase()==intermediary && rates[i].getQuote()==base) 
-        {   
-            amount = amount * (1/rates[i].getAsk());
-        }
-        else if (rates[i].getBase()==base && rates[i].getQuote()==intermediary)
-        {
-            amount = amount * (rates[i].getAsk());
-        }
+        amount = amount * (i1->second.getAsk());
     }
     return amount;
 }
 
 double convertFromIntermediary(const unordered_map<string, ExchangeRate> &rates, const string &base, const string &quote, double amount, const string &intermediary){
-    for(int i=0; i<rates.size(); i++) 
+    auto i1 = rates.find(quote+intermediary);
+    auto i2 = rates.find(intermediary+quote);
+
     {
-        if(rates[i].getBase()==quote && rates[i].getQuote()==intermediary) 
+        if(i1==rates.end())
         {   
-            amount = amount * (1/rates[i].getAsk());
+            amount = amount * (1/i2->second.getAsk());
         }
-        else if (rates[i].getBase()==intermediary && rates[i].getQuote()==quote)
+        else if (i2==rates.end())
         {
-            amount = amount * (rates[i].getAsk());
+            amount = amount * (i1->second.getAsk());
         }
     }
     return amount;
@@ -64,12 +65,12 @@ double exchange(const unordered_map<string, ExchangeRate> &rates, const string &
             amount = intermediaryAmount;
         }
         else {
-            return convertFromIntermediary(rates, base, quote, intermediaryAmount, intermediary);
+            amount = convertFromIntermediary(rates, base, quote, intermediaryAmount, intermediary);
         }
     }
     else if (base == intermediary) {
-        return convertFromIntermediary(rates, base, quote, amount, intermediary);
+        amount = convertFromIntermediary(rates, base, quote, amount, intermediary);
     }
     return amount;
 }
-*/
+
