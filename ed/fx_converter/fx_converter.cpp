@@ -1,7 +1,5 @@
-#include <fstream>
 #include <memory>
 #include <iostream>
-#include <unordered_map>
 #include <thread>
 #include <mutex>
 #include <chrono>
@@ -25,12 +23,12 @@ int main()
     p_rate = board.get_rate("EUR/USD");
     cout << p_rate->get_ask() << endl;
 
-    p_rate->update(-1, 100);
+    p_rate->update_all(100);
 
     p_rate = board.get_rate("EUR/USD");
     cout << p_rate->get_ask() << endl;
 
-    board.convert("EUR", "USD", 100);
+    board.convert("USD", "EUR", 100);
 
     // g_last_quote = 140.00;
 

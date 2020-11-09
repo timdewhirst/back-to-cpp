@@ -22,11 +22,13 @@ double ExchangeBoard::convert(const string& from, const string& to, double amoun
     if (i2 == i1->second.end())
         return -1;
     
+    auto ccy = i2->second;
+
     cout << "Second: " << i2->first << endl;
 
-    cout << "Currency: " << i2->second->pair_name() << endl;
-    cout << "Bid: " << i2->second->get_bid() << endl;
-    cout << "Ask: " << i2->second->get_ask() << endl;
+    cout << "Currency: " << ccy->pair_name() << endl;
+    cout << "Bid: " << ccy->get_bid() << endl;
+    cout << "Ask: " << ccy->get_ask() << endl;
 
     return 0;
 }
