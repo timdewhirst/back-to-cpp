@@ -12,30 +12,35 @@ class ExchangeRate
 private:
     string m_base;
     string m_quote;
-    double m_bid;
-    double m_ask;
+    string m_pair_name;
+    float m_bid;
+    float m_ask;
+    float m_last;
+
+private:
+    inline void set_pair_name() { m_pair_name = m_base + "/" + m_quote; }
 
 public:
     ExchangeRate() {}
-    ExchangeRate(const string& base, const string& quote) : m_base{base}, m_quote{quote} {}
-    ExchangeRate(const string& base, const string& quote, double bid, double ask);
+    ExchangeRate(const string& base, const string& quote) : m_base{base}, m_quote{quote} { set_pair_name(); }
+    ExchangeRate(const string& base, const string& quote, float bid, float ask, float last) :
+        m_base{base}, m_quote{quote}, m_bid{bid}, m_ask{ask}, m_last{last} { set_pair_name(); }
     ~ExchangeRate() {}
 
     const string& base() const { return m_base; }
     const string& quote() const { return m_quote; }
-    string pair_name() const;
+    string pair_name() const { return m_pair_name; };
     
-    double get_bid() const { return m_bid; }
-    double get_ask() const { return m_ask; }
+    float get_bid() const { return m_bid; }
+    float get_ask() const { return m_ask; }
+    float get_last() const { return m_last; }
 
     double buy(double amount);
     double sell(double amount);
 
     // If -1 is passed, then the corresponding quote is not updated
     void update(double bid = -1, double ask = -1);
+    ExchangeRate & update_all(float d);
 };
-
-
-vector<ExchangeRate> load_rates(const string& fname);
 
 #endif

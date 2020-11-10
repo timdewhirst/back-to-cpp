@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 #pragma once
 
@@ -28,4 +29,4 @@ class ExchangeRate
         void setAsk(double value);
 };
 
-        void readExchangeRatesFromFile(const string fileName, vector<ExchangeRate> &exchangeRates);
+        void readExchangeRatesFromFile(const string fileName, unordered_map<string, ExchangeRate> &exchangeRates);

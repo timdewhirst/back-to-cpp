@@ -7,11 +7,10 @@
 #include <cmath>
 #include <cassert>
 #include "random_walk.hpp"
+#include "board_updater.hpp"
+#include "globals.hpp"
 
 using namespace std;
-
-bool g_run_random_walk = true;
-mutex g_random_walk_mutex;
 
 double rand_between(double a, double b)
 {
@@ -25,28 +24,24 @@ int rand_between(int a, int b)
     return int(a + (b - a) * double(rand()) / RAND_MAX);
 }
 
-void gen_price_change()
+void quote_change(atomic<bool> &keep_running)
 {
-    unique_lock<mutex> ul(g_random_walk_mutex);
-    double x;
-
+    g_mutex_cout.lock();
     cout << "RandomWalk thread: Starting" << endl;
+    g_mutex_cout.unlock();
 
     srand(time(NULL));
 
-    while (g_run_random_walk)
+    while (keep_running)
     {
-        x = 0.10 / sqrt(24.0 * 60.0 * 60.0) * rand_between(-1.0, 1.0) * 4;
+        g_last_quote = g_last_quote * exp(0.10 / sqrt(24.0 * 60.0 * 60.0) * rand_between(-1.0, 1.0) * 4);
 
-        cout << "RandomWalk thread: generated new price change " << setprecision(8) << exp(x) << endl;
-        g_random_walk_mutex.unlock();
+        g_cv_newquote.notify_one();
 
-        this_thread::sleep_for(chrono::milliseconds(500));
-
-        g_random_walk_mutex.lock();
+        this_thread::sleep_for(chrono::milliseconds(rand_between(2000, 5000)));
     }
 
-    g_random_walk_mutex.unlock();
+    g_mutex_cout.lock();
     cout << "RandomWalk thread: Stopping" << endl;
-    g_random_walk_mutex.lock();
+    g_mutex_cout.unlock();
 }

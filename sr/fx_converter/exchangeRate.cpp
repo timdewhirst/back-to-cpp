@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <unordered_map>
 
 #include "exchangeRate.hpp"
 
@@ -40,7 +41,7 @@ void ExchangeRate::setAsk(double value) {
     ask = value;
 }
 
-void readExchangeRatesFromFile(const string fileName, vector<ExchangeRate> &exchangeRates)
+void readExchangeRatesFromFile(const string fileName, unordered_map<string, ExchangeRate> &exchangeRates)
 {
     ifstream file(fileName.c_str());
     if (!file)
@@ -49,6 +50,7 @@ void readExchangeRatesFromFile(const string fileName, vector<ExchangeRate> &exch
     }
 
     string line;
+    string key;
     const char delim = ',';
     while(getline(file, line))
     {
@@ -65,7 +67,10 @@ void readExchangeRatesFromFile(const string fileName, vector<ExchangeRate> &exch
         ss >> exchangeAsk; ss.ignore(256, delim);
         exchangeRate.setAsk(exchangeAsk);
         if(ss)
-            exchangeRates.push_back(exchangeRate);
+            key = exchangeBase.append(exchangeQuote);
+            if(key.length()==6) {
+                exchangeRates.insert({key ,exchangeRate});
+            }
     }
     file.close();
 }
