@@ -16,19 +16,17 @@ using namespace std;
 int main()
 {
     ExchangeBoard board;
-    shared_ptr<ExchangeRate> p_rate;
+    //shared_ptr<ExchangeRate> p_rate;
 
-    board.load_rates("./../datasets/exchange_rates.csv");
+    board.load_rates("./../../datasets/exchange_rates.csv");
 
-    p_rate = board.get_rate("EUR/USD");
-    cout << p_rate->get_ask() << endl;
+    board.convert("EUR", "JPY", 100);
+    cout << endl;
+    
+    board.convert("EUR", "KZH", 100);
+    cout << endl;
 
-    p_rate->update_all(100);
-
-    p_rate = board.get_rate("EUR/USD");
-    cout << p_rate->get_ask() << endl;
-
-    board.convert("USD", "EUR", 100);
+    board.convert("CAD", "JPY", 100);
 
     // g_last_quote = 140.00;
 
@@ -37,12 +35,12 @@ int main()
     // thread th2(update_board, std::ref(run_threads));
     // string ccy1, ccy2;
 
-    // g_random_walk_mutex.lock();
-    // cout << "What currency?: ";
-    // cin >> ccy1;
-    // g_random_walk_mutex.unlock();
+    // // g_random_walk_mutex.lock();
+    // // cout << "What currency?: ";
+    // // cin >> ccy1;
+    // // g_random_walk_mutex.unlock();
 
-    //this_thread::sleep_for(chrono::seconds(15));
+    // this_thread::sleep_for(chrono::seconds(15));
 
     // run_threads = false;
 

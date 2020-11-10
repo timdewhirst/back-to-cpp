@@ -35,8 +35,11 @@ public:
     float get_ask() const { return m_ask; }
     float get_last() const { return m_last; }
 
-    double buy(double amount);
-    double sell(double amount);
+    double convert_from(const string &from, double amount) const;
+    double convert_to(const string &to, double amount) const;
+    
+    double buy(double amount) const { return amount * m_ask; }
+    double sell(double amount) const { return amount * m_bid; }
 
     // If -1 is passed, then the corresponding quote is not updated
     void update(double bid = -1, double ask = -1);

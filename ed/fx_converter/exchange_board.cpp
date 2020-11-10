@@ -10,25 +10,53 @@ vector<string> split(const string &s, char delim);
 
 double ExchangeBoard::convert(const string& from, const string& to, double amount)
 {
+    if (from == to)
+        return amount;
+
+    unordered_map<string, vector<shared_ptr<const ExchangeRate>>> chains;
     auto i1 = m_board.find(from);
 
-    // Check if a conversion from source ccy can be done
+    // Check if 'from' ccy even exists
     if (i1 == m_board.end())
         return -1;
-
-    cout << "First: " << i1->first << endl;
-
-    auto i2 = i1->second.find(to);
-    if (i2 == i1->second.end())
-        return -1;
     
-    auto ccy = i2->second;
+    // Check if a direct conversion can be done
+    auto i2 = i1->second.find(to);
 
-    cout << "Second: " << i2->first << endl;
+    if (i2 != i1->second.end())
+    {
+        cout << from << " -> " << to << endl;
+        cout << i2->second->pair_name() << endl;
+        cout << amount << " " << from << " -> " << i2->second->convert_from(from, amount) << " " << to << endl;
 
-    cout << "Currency: " << ccy->pair_name() << endl;
-    cout << "Bid: " << ccy->get_bid() << endl;
-    cout << "Ask: " << ccy->get_ask() << endl;
+        return i2->second->convert_from(from, amount);
+    }
+  
+    // Find all conversion chains, using 1 intermediary ccy
+    for (auto i_interm_ccy : i1->second)
+    {
+        vector<shared_ptr<const ExchangeRate>> ch;
+        auto iter_toccy = m_board[i_interm_ccy.first].find(to);
+
+        if (iter_toccy != m_board[i_interm_ccy.first].end())
+        {
+            ch.push_back(i_interm_ccy.second);
+            ch.push_back(iter_toccy->second);
+            
+            chains.insert(make_pair(i_interm_ccy.first, ch));
+        }
+    }
+
+    for (auto chain : chains)
+    {
+        auto ccy1 = chain.second[0];
+        auto ccy2 = chain.second[1];
+
+        cout << from << "->" << chain.first << "->" << to << endl;
+        cout << ccy1->pair_name() << " " << ccy2->pair_name() << endl;
+        cout << amount << " " << from << " -> " << 
+            ccy2->convert_to(to, ccy1->convert_from(from, amount)) << " " << to << endl << endl;
+    }
 
     return 0;
 }

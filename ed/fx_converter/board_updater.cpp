@@ -19,12 +19,13 @@ void update_board(atomic<bool> &keep_running)
     {
         unique_lock<mutex> ul(g_mutex_boardupdater);
 
-        g_cv_newquote.wait_for(ul, chrono::seconds(1));
+        g_cv_newquote.wait_for(ul, chrono::seconds(5));
 
         if (keep_running)
         {
             g_mutex_cout.lock();
-            cout << '\r' << "BoardUpdater thread: Last quote " << g_last_quote << flush;
+            //cout << '\r' << "BoardUpdater thread: Last quote " << g_last_quote << flush;
+            cout << "BoardUpdater thread: Last quote " << g_last_quote << endl;
             g_mutex_cout.unlock();
         }
     }

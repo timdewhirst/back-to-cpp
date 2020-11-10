@@ -4,16 +4,6 @@
 using namespace std;
 
 
-double ExchangeRate::buy(double amount)
-{
-    return amount * m_ask;
-}
-    
-double ExchangeRate::sell(double amount)
-{
-    return amount * m_bid;
-}
-
 void ExchangeRate::update(double bid, double ask)
 {
     if (bid != -1) m_bid = bid;
@@ -27,4 +17,22 @@ ExchangeRate & ExchangeRate::update_all(float change)
     m_last += change;
 
     return *this;
+}
+
+double ExchangeRate::convert_from(const string &from, double amount) const
+{
+    if (from == m_base)
+        return amount * m_bid;
+    else if (from == m_quote)
+        return amount / m_ask;
+    else return -1;
+}
+
+double ExchangeRate::convert_to(const string &to, double amount) const
+{
+    if (to == m_base)
+        return amount / m_ask;
+    else if (to == m_quote)
+        return amount * m_bid;
+    else return -1;
 }
