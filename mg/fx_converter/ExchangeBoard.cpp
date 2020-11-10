@@ -37,7 +37,11 @@ double maxCurrency(unordered_map<string, double> curr_to_amount){
     return current_max;
 }
 
+//obtain intermediate value
 double const intermed(unordered_map<string, unordered_map<string,double>> &ubid,unordered_map<string, unordered_map<string,double>> &uask, const string &curr_from, const string &inter, const string &curr_to,const double &amount, const string& curr_base){
+    
+    unordered_map<string, unordered_map<string,double>>::const_iterator got = ubid.find(curr_from);
+    //(*got)->first;
     if((curr_base=="Y")||(curr_base=="y")){
         if (ubid[inter][curr_to]){
             double from_inter=ubid[curr_from][inter];
@@ -85,12 +89,8 @@ double const corr_mon(unordered_map<string, unordered_map<string,double>> &ubid,
     }*/
 
     //Check if invalid input and conversion to be done
-    int j=0;
     for(const auto& base:ubid){
-        j++;
-        int k=0;
         for(const auto& quote:base.second){
-            k++;
             //Check if currency from is a base currency
             if(curr_from==base.first){
                 if (quote.first==curr_to){
@@ -123,7 +123,7 @@ double const corr_mon(unordered_map<string, unordered_map<string,double>> &ubid,
                     if (find(base_curr.begin(),base_curr.end(),quote.first)!=base_curr.end()){
                         convers=intermed(ubid,uask,curr_from,quote.first,curr_to, amount,"n");
                         curr_to_amount[quote.first]=convers;
-                        cout<<amount<<" ppppp"<<uask[0][1]<<endl;
+                        cout<<amount<<" ppppp"<<uask[quote.first][base.first]<<endl;
                         cout<<convers<<endl;
                         cout<<curr_to_amount[quote.first]<<endl;
                     }
@@ -136,4 +136,3 @@ double const corr_mon(unordered_map<string, unordered_map<string,double>> &ubid,
     cout<<amount<<" "<<curr_from<<" successfully changed to "<<conversion<<" "<<curr_to;
     return conversion;
 };
-
