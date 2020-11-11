@@ -1,19 +1,24 @@
 all: converter.exe
 
-converter.exe: converter.o currency.o  exchangeRate.o exchangeBoard.o
-	g++ -o converter.exe converter.o currency.o  exchangeRate.o exchangeBoard.o
+LINK_TARGET = converter.exe
 
-converter.o: converter.cpp 
-	g++ -g -c converter.cpp
+OBJS = \
+	converter.o \
+	exchangeRate.o \
+	currency.o \
+	exchangeBoard.o \
+	randomWalk.o
 
-currency.o: currency.cpp currency.hpp
-	g++ -g -c currency.cpp
+$(LINK_TARGET): $(OBJS)
+	g++ -pthread -o $@ $^
 
-ExchangeRate.o: exchangeRate.cpp exchangeRate.hpp 
-	g++ -g -c exchangeRate.cpp
+%.o : %.cpp
+	g++ -pthread -g -c $^
 
-ExchangeBoard.o: exchangeBoard.cpp exchangeBoard.hpp
-	g++ -g -c exchangeBoard.cpp
+exchange_rate.o: exchangeRate.hpp
+currency.o: currency.hpp
+exchange_board.o: exchangeBoard.hpp
+randomWalk.o: randomWalk.hpp
 
 clean:
-	rm converter.exe converter.o currency.o exchangeBoard.o exchangeRate.o
+	rm $(LINK_TARGET) $(OBJS)

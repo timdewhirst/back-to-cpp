@@ -32,7 +32,7 @@ void Currency::setNumerice_code(int value) {
     numeric_code = value;
 }
 
-void readCurrenciesFromFile(const string fileName, vector<Currency> &currencies) 
+void readCurrenciesFromFile(const string &fileName, vector<Currency> &currencies) 
 {
     ifstream file(fileName.c_str());
     if(!file) 
@@ -48,6 +48,7 @@ void readCurrenciesFromFile(const string fileName, vector<Currency> &currencies)
         Currency currency;
         string currName, currCode;
         int currNum;
+        //Read each line up to delimiter and add each value to a currency object
         getline(ss, currName, delim);
         currency.setName(currName);
         getline(ss, currCode, delim);
@@ -55,6 +56,7 @@ void readCurrenciesFromFile(const string fileName, vector<Currency> &currencies)
         ss >> currNum; ss.ignore(256, delim);
         currency.setNumerice_code(currNum);
         if (ss)
+            //Add each currency object to the currencies vector
             currencies.push_back(currency); 
     }
     file.close();

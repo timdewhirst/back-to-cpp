@@ -1,5 +1,7 @@
+/*ExchangeRate class allows for the creation of ExchangeRate objects
+via the readFromFile method in ExchangeBoard*/
+
 #include <string>
-#include <vector>
 #include <unordered_map>
 
 #pragma once
@@ -13,20 +15,18 @@ class ExchangeRate
         string quote;
         double bid;
         double ask;
+        double last;
 
     public:
-        ExchangeRate() : base {""}, quote {""}, bid{0}, ask{0} {};
-        ~ExchangeRate() {};
+        ExchangeRate() {}
+        ExchangeRate(const string& new_base, const string& new_quote, double new_bid, double new_ask, double new_last):
+            base{new_base}, quote{new_quote}, bid{new_bid}, ask{new_ask}, last{new_last} {}
+        ~ExchangeRate() {}
 
         string getBase() const;
         string getQuote() const;
         double getBid() const;
         double getAsk() const;
+        double getLast() const;
 
-        void setBase(string value);
-        void setQuote(string value);
-        void setBid(double value);
-        void setAsk(double value);
 };
-
-        void readExchangeRatesFromFile(const string fileName, unordered_map<string, ExchangeRate> &exchangeRates);

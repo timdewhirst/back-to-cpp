@@ -1,6 +1,8 @@
+/*Currency class reads data from a CSV file, creating Currrency objects and
+placing them in a vector */
+
 #include <string>
 #include <vector>
-#pragma once
 
 using namespace std;
 
@@ -23,4 +25,4 @@ class Currency
         void setNumerice_code(int value);
 };
 
-        void readCurrenciesFromFile(const string fileName, vector<Currency> &currencies);
+        void readCurrenciesFromFile(const string &fileName, vector<Currency> &currencies);
