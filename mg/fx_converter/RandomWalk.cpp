@@ -19,7 +19,7 @@ int randomWalk(unordered_map<string, unordered_map<string, double>>& ubid,unorde
     this_thread::sleep_for(std::chrono::seconds(2));
 
     double price_change=exp(x-1);
-    unique_lock<mutex> p= (mu);
+    //unique_lock<mutex> p= (mu);
 
     
 
@@ -31,5 +31,5 @@ int main(){
     unordered_map<string,unordered_map<string, double>> uask;
     randomWalk(ubid,uask);
         
-
-}
+    thread t1();
+};

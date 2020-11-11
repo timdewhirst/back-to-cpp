@@ -14,10 +14,10 @@ using namespace std;
 
 class ExchangeBoard{
     private:
-        unordered_map<string, unordered_map<string,double>> exchangeRates;   
+        unordered_map<string, unordered_map<string,ExchangeRate>> exchangeRates;   
     public:
         bool didExchange=false;
         ExchangeBoard() {}
 
 };
-double const corr_mon(unordered_map<string, unordered_map<string,double>> &ubid,unordered_map<string, unordered_map<string,double>> &uask,const string &curr_from, const string &curr_to, const double &amount);
+double const corr_mon(unordered_map<string, unordered_map<string,shared_ptr<ExchangeRate>>> &umap,const string &curr_from, const string &curr_to, const double &amount);

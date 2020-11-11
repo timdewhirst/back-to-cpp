@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 using namespace std;
 //## Class __ExchangeRate__
 
@@ -22,6 +23,7 @@ class ExchangeRate{
 
     public:
         ExchangeRate() {}
+         //~ExchangeRate();
 
     ExchangeRate(string new_base, string new_quote, double new_bid, double new_ask, double new_last){
             base= new_base;
@@ -31,6 +33,14 @@ class ExchangeRate{
             last= new_last;
     }
 
+    /*ExchangeRate::ExchangeRate(){
+        delete base;
+        delete quote;
+        delete bid;
+        delete ask;
+        delete last;
+    }
+*/
    string getBase (){
         return base;
     }
@@ -77,4 +87,4 @@ class ExchangeRate{
     }
 };
 
-bool const getExchange(const string fileName,  unordered_map<string, unordered_map<string,double>> &umap, unordered_map<string, unordered_map<string,double>> &um_ask);
+bool const getExchange(const string fileName,  unordered_map<string, unordered_map<string,shared_ptr<ExchangeRate>>> &umap);
