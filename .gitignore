@@ -36,3 +36,7 @@
 
 # Jetbrains
 .idea
+
+# emacs
+*~
+#*#
